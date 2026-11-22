@@ -1,0 +1,33 @@
+name: Comunicador
+
+on:
+  workflow_dispatch:
+    inputs:
+      mision:
+        description: "Misión a comunicar"
+        required: true
+        type: string
+        default: "Operación Banco Mundial"
+      lider:
+        description: "Líder de la misión"
+        required: true
+        type: string
+        default: "Lex Luthor"
+
+jobs:
+    reporte-de-reclutamiento:
+        runs-on: ubuntu-latest
+
+        steps: 
+            - name: Comunicador de la legion
+              run: sudo apt-get install -y cowsay
+          
+            - name: Usar comunicador
+              env:
+                MISION: ${{ inputs.mision }}
+                LIDER: ${{ inputs.lider }}
+              run: |
+                echo "Comunicando misión $MISION liderada por $LIDER"
+                cowsay -f eyes "Comunicando misión $MISION liderada por $LIDER"
+                echo ""
+                echo "Comunicador finalizado"
